@@ -60,6 +60,7 @@ def infer_strategy(device, verbose=False):
             strategy = tf.distribute.get_strategy()
 
     auto = tf.data.experimental.AUTOTUNE
+    strategy = tf.distribute.MultiWorkerMirroredStrategy()
     replicas = strategy.num_replicas_in_sync
 
     if verbose:

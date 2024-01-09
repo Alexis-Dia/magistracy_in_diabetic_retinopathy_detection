@@ -13,6 +13,7 @@ sns.set()
 
 
 def preprocess_no_gaussian(image, img_pixel):
+    # image2 = "H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\\10_left.jpeg"
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     assert image.ndim == 3
     gray_img = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)

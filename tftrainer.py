@@ -53,22 +53,23 @@ class TFTrainer:
         self._init_device_and_strategy()
 
         self._auto = tf.data.experimental.AUTOTUNE
-        self._replicas = self._strategy.num_replicas_in_sync
+        #self._replicas = self._strategy.num_replicas_in_sync
+        self._replicas = 1
         self._model_test = self._build_model(ef=self.eff_net)
         self._skf = KFold(n_splits=self.folds_count, shuffle=True, random_state=42)
 
-        assert self._strategy
+        #assert self._strategy
         assert osp.exists(self.source_dir)
         assert osp.exists(self.destination_dir)
         assert img_size == 512  # only 512 is currently supported
-        assert self.device in ['TPU', 'GPU']
+        assert self.device in ['TPU', 'GPU', 'CPU']
         assert self._model_test is not None
 
-        self._num_total_train_files = len(tf.io.gfile.glob(self.source_dir + '/train*.tfrec'))
+        self._num_total_train_files = len(tf.io.gfile.glob(self.source_dir + '\\train*.tfrec'))
         assert self._num_total_train_files >= self.folds_count
 
         if self.verbose:
-            print(f'replicas: {self._replicas}')
+            #print(f'replicas: {self._replicas}')
             print(f'source dir: {self.source_dir}')
             self._model_test.summary()
             print(f'num total train files {self._num_total_train_files}')
@@ -163,9 +164,9 @@ class TFTrainer:
     @classmethod
     def load_model(cls, img_size=512, eff_net=4, fold_index=1):
         loader = cls(
-            device='GPU',
-            source_dir=r'G:\Storage\datasets\retinopaty\source\diabetic-retinopathy-detection\tfrec_balanced',
-            destination_dir='.',
+            device='CPU',
+            source_dir=r'H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\tfrec_balanced',
+            destination_dir=r'H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\dist',
             img_size=img_size,
             folds_count=5,
             epoch_count=25,
@@ -244,8 +245,8 @@ class TFTrainer:
         print('#' * 60)
         print('#### FOLD', fold + 1)
 
-        print('#### Image Size %i, EfficientNet B%i, batch_size %i' %
-              (self.img_size, self.eff_net, self.batch_size * self._replicas))
+        # print('#### Image Size %i, EfficientNet B%i, batch_size %i' %
+        #       (self.img_size, self.eff_net, self.batch_size * self._replicas))
         print('#### Epochs: %i' % self.epoch_count)
 
         # create trade and validation subsets
@@ -265,8 +266,9 @@ class TFTrainer:
             tf.tpu.experimental.initialize_tpu_system(self._tpu)
 
         K.clear_session()
-        with self._strategy.scope():
-            model = self._build_model(dim=self.img_size, ef=self.eff_net)
+        model = self._build_model(dim=self.img_size, ef=self.eff_net)
+        # with self._strategy.scope():
+        #     model = self._build_model(dim=self.img_size, ef=self.eff_net)
 
         # callback to save best model for each fold
         sv = tf.keras.callbacks.ModelCheckpoint(
@@ -331,9 +333,9 @@ class TFTrainer:
 
 if __name__ == '__main__':
     t = TFTrainer(
-        device='GPU',
-        source_dir=r'G:\Storage\datasets\retinopaty\source\diabetic-retinopathy-detection\tfrec_no_gaussian',
-        destination_dir='.',
+        device='CPU',
+        source_dir=r'H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\tfrec_no_gaussian',
+        destination_dir=r'H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\dist',
         img_size=512,
         folds_count=5,
         epoch_count=25,

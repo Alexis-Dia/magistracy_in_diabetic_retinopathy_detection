@@ -314,8 +314,8 @@ class TFValidator:
 if __name__ == '__main__':
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     v = TFValidator(
-        device='GPU',
-        source_dir=r'G:\Storage\datasets\retinopaty\source\diabetic-retinopathy-detection\tfrec_no_gaussian',
+        device='CPU',
+        source_dir=r'H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\tfrec_no_gaussian',
         validators=[ExtendedStatsValidator()],
         img_size=512,
         folds_count=5,

@@ -35,11 +35,11 @@ PROCESS_IMAGE_CALLBACKS = {
 
 
 @cli.command()
-@click.option('-l', '--file-labels', type=click.STRING, default='trainLabels.csv',
+@click.option('-l', '--file-labels', type=click.STRING, default="H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\data from kaggle\\trainLabels.csv",
               help='train labels file, format csv: id_<side>,level')
-@click.option('-t', '--train-dir', type=click.STRING, default='train',
+@click.option('-t', '--train-dir', type=click.STRING, default="H:\Bsuir\Diplom\\train",
               help='train dir, directory with source images, used for training, dir must exist')
-@click.option('-d', '--dest-dir', type=click.STRING, default='dest',
+@click.option('-d', '--dest-dir', type=click.STRING, default="H:\Bsuir\Diplom\\dest",
               help='destination dir for output tfrec files, dir must exist')
 @click.option('-s', '--sample-dir', type=click.STRING, default='sample',
               help='sample dir, used for printing preprocessed images, used temporary for test purposes only')
@@ -68,11 +68,11 @@ def generate(file_labels,
 
 
 @cli.command()
-@click.option('-r', '--run-on', type=click.STRING, default='TPU',
+@click.option('-r', '--run-on', type=click.STRING, default='CPU',
               help='on Windows, use GPU, on  GKE use TPU')
-@click.option('-s', '--source-dir', type=click.STRING, default='.',
+@click.option('-s', '--source-dir', type=click.STRING, default='H:\Bsuir\Diplom\dest-Copy',
               help='source dir: directory with train*.tfrec files, must exist')
-@click.option('-d', '--dest-dir', type=click.STRING, default='.',
+@click.option('-d', '--dest-dir', type=click.STRING, default='H:\Bsuir\Diplom\destTrain',
               help='directory for storing weight coefficients, logs')
 @click.option('-i', '--img-res', type=click.INT, default=512,
               help='tensor resolution')
@@ -132,7 +132,7 @@ def predict(filename):
         [print(f'{e}: {x * 100:3.2f}%') for e, x in enumerate(categorical_vector[0])]
         pass
     except Exception as e:
-        print(f'error: {e}')
+        print(f'error1: {e}')
 
 
 if __name__ == '__main__':
