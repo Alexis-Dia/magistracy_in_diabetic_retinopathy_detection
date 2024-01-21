@@ -35,11 +35,14 @@ PROCESS_IMAGE_CALLBACKS = {
 
 
 @cli.command()
-@click.option('-l', '--file-labels', type=click.STRING, default="H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\data from kaggle\\trainLabels.csv",
+#@click.option('-l', '--file-labels', type=click.STRING, default="H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\data from kaggle\\trainLabels.csv",
+@click.option('-l', '--file-labels', type=click.STRING, default="H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\data from kaggle\\trainLabels-short.csv",
               help='train labels file, format csv: id_<side>,level')
-@click.option('-t', '--train-dir', type=click.STRING, default="H:\Bsuir\Diplom\\train",
+#@click.option('-t', '--train-dir', type=click.STRING, default="H:\Bsuir\Diplom\\train",
+@click.option('-t', '--train-dir', type=click.STRING, default="H:\Bsuir\Diplom\\train-short",
               help='train dir, directory with source images, used for training, dir must exist')
-@click.option('-d', '--dest-dir', type=click.STRING, default="H:\Bsuir\Diplom\\dest",
+#@click.option('-d', '--dest-dir', type=click.STRING, default="H:\Bsuir\Diplom\\dest",
+@click.option('-d', '--dest-dir', type=click.STRING, default="H:\Bsuir\Diplom\\dest-short",
               help='destination dir for output tfrec files, dir must exist')
 @click.option('-s', '--sample-dir', type=click.STRING, default='sample',
               help='sample dir, used for printing preprocessed images, used temporary for test purposes only')
@@ -71,8 +74,10 @@ def generate(file_labels,
 @click.option('-r', '--run-on', type=click.STRING, default='CPU',
               help='on Windows, use GPU, on  GKE use TPU')
 @click.option('-s', '--source-dir', type=click.STRING, default='H:\Bsuir\Diplom\dest-Copy',
+#@click.option('-s', '--source-dir', type=click.STRING, default='H:\Bsuir\Diplom\dest-short',
               help='source dir: directory with train*.tfrec files, must exist')
 @click.option('-d', '--dest-dir', type=click.STRING, default='H:\Bsuir\Diplom\destTrain',
+#@click.option('-d', '--dest-dir', type=click.STRING, default='H:\Bsuir\Diplom\destTrain-short',
               help='directory for storing weight coefficients, logs')
 @click.option('-i', '--img-res', type=click.INT, default=512,
               help='tensor resolution')
@@ -113,7 +118,12 @@ def train(run_on,
     if should_plot:
         t.plot()
 
-
+# "H:\99_right.jpeg"
+# "H:\Bsuir\Diplom\train\9999_right.jpeg"
+# 10109_right - 2
+# 1008_left - 3
+# 1008_right - 3
+# 16_right - 4
 @cli.command()
 @click.argument('filename')
 def predict(filename):

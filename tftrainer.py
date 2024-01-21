@@ -66,7 +66,7 @@ class TFTrainer:
         assert self._model_test is not None
 
         self._num_total_train_files = len(tf.io.gfile.glob(self.source_dir + '\\train*.tfrec'))
-        assert self._num_total_train_files >= self.folds_count
+        #assert self._num_total_train_files >= self.folds_count
 
         if self.verbose:
             #print(f'replicas: {self._replicas}')
@@ -165,8 +165,10 @@ class TFTrainer:
     def load_model(cls, img_size=512, eff_net=4, fold_index=1):
         loader = cls(
             device='CPU',
-            source_dir=r'H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\tfrec_balanced',
-            destination_dir=r'H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\dist',
+            #source_dir=r'H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\tfrec_balanced',
+            source_dir=r'H:\Bsuir\Diplom\magistracy_in_diabetic_retinopathy_detection\results',
+            #destination_dir=r'H:\Bsuir\Diplom\от Ильи Рябоконя\cshnick_crew-drcli-9d43a42af299\dist',
+            destination_dir=r'H:\Bsuir\Diplom\dest',
             img_size=img_size,
             folds_count=5,
             epoch_count=25,
